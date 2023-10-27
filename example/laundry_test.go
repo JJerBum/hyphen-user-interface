@@ -7,6 +7,8 @@ import (
 )
 
 func TestMain(t *testing.T) {
-	laundry := laundry.New("../basket")
+	laundry := laundry.New(laundry.Config{
+		BasketDir: "./basket",
+	})
 	log.Fatal(laundry.Run(":8080"))
 }
