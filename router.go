@@ -16,10 +16,10 @@ type (
 
 	handler struct {
 		handlerFunc
-		target string
+		basket
 	}
 
-	handlerFunc func(w http.ResponseWriter, r *http.Request, url string)
+	handlerFunc func(w http.ResponseWriter, r *http.Request, target string)
 )
 
 // Router receivers
@@ -28,7 +28,7 @@ type (
 // 여기서 핸들러란, 특정 엔드포인트의 요청 시 처리하는 함수를 뜻합니다.
 // 핸들어의 함수 원형은 다음과 같습니다.
 // type HandlerFunc func(ResponseWriter, *Request)
-func (r *router) HandleFunc(method, pattern, target string) {
+func (r *router) HandleFunc(method, pattern string, b basket) {
 	// 매개변수 method로 등록된 맵이 있는지 확인
 	m, ok := r.handlers[method]
 	if ok == false {
@@ -39,7 +39,7 @@ func (r *router) HandleFunc(method, pattern, target string) {
 	// 매개변수 method로 등록된 맵에 URL 팬턴과 핸들러 함수 등록
 	m[pattern] = handler{
 		handlerFunc: RequestOnBehalf,
-		target:      target,
+		basket:      b,
 	}
 }
 
@@ -50,12 +50,14 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	// request HTTP method에 맞는 모든 handers를 반복하여 요청 URL에 해당하는 handler를 찾음
 	for pattern, handler := range r.handlers[req.Method] {
 		if ok := r.match(pattern, req.URL.Path); ok {
-			handler.handlerFunc(w, req, handler.target)
+			target := handler.basket.Target.IP + handler.basket.Target.Port
+			handler.handlerFunc(w, req, target)
+			return
 		}
 	}
 
 	// 요청에 알맞지 않았을 경우 아래 코드 실행
-	w.WriteHeader(http.StatusNotFound)
+	http.NotFound(w, req)
 	return
 }
 

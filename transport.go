@@ -8,9 +8,9 @@ import (
 var customTransport = http.DefaultTransport
 
 // 대리 요청
-func RequestOnBehalf(w http.ResponseWriter, r *http.Request, targetURL string) {
+func RequestOnBehalf(w http.ResponseWriter, r *http.Request, target string) {
 	// proxy서버에 요청된 Method, URL, Body를 이용해 proxy 요청과 같은 proxy 서버에서 타켓 서버로 요청할  새로운 HTTP 요청을 생성합니다.
-	proxyReq, err := http.NewRequest(r.Method, targetURL+r.URL.Path, r.Body)
+	proxyReq, err := http.NewRequest(r.Method, target+r.URL.Path, r.Body)
 	if err != nil {
 		http.Error(w, "Error creating proxy reqeust", http.StatusInternalServerError)
 		return

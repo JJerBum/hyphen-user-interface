@@ -31,7 +31,7 @@ func New(c ...Config) *laundry {
 
 	for _, basket := range baskets {
 		for _, endpoint := range basket.Endpoints {
-			l.r.HandleFunc(endpoint.Method, endpoint.Pattern, basket.Target.IP+basket.Target.Port)
+			l.r.HandleFunc(endpoint.Method, endpoint.Pattern, basket)
 		}
 	}
 
