@@ -30,6 +30,7 @@ type (
 	}
 )
 
+// loadBasket 함수는 마이크로 서비스 정보가 명세된 json파일을 일고 Unmarshal 한 뒤 []basket을 반환하는 함수 입니다.
 func loadBasket(basketDir string) (baskets []basket) {
 
 	jsonFiles, err := os.ReadDir(basketDir)
