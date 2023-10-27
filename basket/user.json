@@ -1,0 +1,13 @@
+{
+  "target": {
+    "name": "test",
+    "ip": "http://127.0.0.1",
+    "port": ":9190"
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "pattern": "/posts/:post_id"
+    }
+  ]
+}
