@@ -1,0 +1,25 @@
+{
+    "target": {
+        "name": "siss",
+        "ip":   "http://127.0.0.1",
+        "port": ":8083"
+    },
+    "endpoints": [
+        {
+            "method": "POST",
+            "pattern": "/api/siss/images/image"
+        },
+        {
+            "method": "GET",
+            "pattern": "/api/siss/images/:image-id"
+        },
+        {
+            "method": "PUT",
+            "pattern": "/api/siss/images/:image-id"
+        },
+        {
+            "method": "DELETE",
+            "pattern": "/api/siss/images/:image-id"
+        }
+    ]
+}

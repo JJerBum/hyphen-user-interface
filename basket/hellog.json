@@ -1,0 +1,49 @@
+{
+    "target": {
+        "name": "hellog",
+        "ip":   "http://127.0.0.1",
+        "port": ":8082"
+    },
+    "endpoints": [
+        {
+            "method": "POST",
+            "pattern": "/api/hellog/posts/:post-id"
+        },
+        {
+            "method": "GET",
+            "pattern": "/api/hellog/posts/:post-id"
+        },
+        {
+            "method": "PATCH",
+            "pattern": "/api/hellog/posts/:post-id"
+        },
+        {
+            "method": "DELETE",
+            "pattern": "/api/hellog/posts/:post-id"
+        },
+        {
+            "method": "POST",
+            "pattern": "/api/hellog/posts/:post-id/comments/comment"
+        },
+        {
+            "method": "GET",
+            "pattern": "/api/hellog/posts/:post-id/comments"
+        },
+        {
+            "method": "PATCH",
+            "pattern": "/api/hellog/posts/:post-id/comments/comment"
+        },
+        {
+            "method": "DELETE",
+            "pattern": "/api/hellog/posts/:post-id/comments/comment"
+        },
+        {
+            "method": "PATCH",
+            "pattern": "/api/hellog/posts/:post_id/unlike"
+        },
+        {
+            "method": "PATCH",
+            "pattern": "/api/hellog/posts/:post_id/like"
+        }
+    ]
+}

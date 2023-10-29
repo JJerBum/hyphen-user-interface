@@ -1,13 +1,69 @@
 {
   "target": {
-    "name": "test",
-    "ip": "http://127.0.0.1",
-    "port": ":10000"
+      "name": "user",
+      "ip":   "http://127.0.0.1",
+      "port": ":8081"
   },
   "endpoints": [
-    {
-      "method": "GET",
-      "pattern": "/posts/:post_id"
-    }
+      {
+          "method": "POST",
+          "pattern": "/api/auth/signup"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/auth/signin"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/auth/unregister"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/inquiry"
+      },
+      {
+          "method": "GET",
+          "pattern": "/api/inquiry"
+      },
+      {
+          "method": "GET",
+          "pattern": "/api/inquiry/:id"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/mail/send"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/token/validate"
+      },
+      {
+          "method": "POST",
+          "pattern": "/api/token/refresh"
+      },
+      {
+          "method": "GET",
+          "pattern": "/api/user/image"
+      },
+      {
+          "method": "GET",
+          "pattern": "/api/user/info"
+      },
+      {
+          "method": "PATCH",
+          "pattern": "/api/user/name"
+      },
+      {
+          "method": "PATCH",
+          "pattern": "/api/user/image"
+      },
+      {
+          "method": "PATCH",
+          "pattern": "/api/user/password"
+      },
+      {
+          "method": "DELETE",
+          "pattern": "/api/user/image"
+      }
   ]
 }

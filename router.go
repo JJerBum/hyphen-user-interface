@@ -47,6 +47,8 @@ func (r *router) HandleFunc(method, pattern string, b basket) {
 // router's ServeHTTP 함수는 클라이언트 http요청의 http Method와 URL경로를 분석해서 그에 맞는 핸들러를 찾아 동작시킵니다.
 // 만약 찾지 못했다면 ~ 합니다.
 func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	enableCors(&w)
+
 	// request HTTP method에 맞는 모든 handers를 반복하여 요청 URL에 해당하는 handler를 찾음
 	for pattern, handler := range r.handlers[req.Method] {
 		if ok := r.match(pattern, req.URL.Path); ok {
@@ -101,4 +103,20 @@ func (router) match(pattern, path string) bool {
 	}
 
 	return true
+}
+
+// enableCors는 모든 cors를 다 열어주는 함수 입니다.
+// 모두 다 열어주었기 때문에 보안에 매우 취약합니다.
+func enableCors(w *http.ResponseWriter) {
+	// 모든 도메인을 허용
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+
+	// 모든 HTTP 메서드를 허용
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+
+	// 모든 헤더를 허용
+	(*w).Header().Set("Access-Control-Allow-Headers", "*")
+
+	// 자격 증명을 사용할 수 있도록 허용
+	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
 }
